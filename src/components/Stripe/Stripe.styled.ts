@@ -12,6 +12,7 @@ export const StyledStripe = styled.div<{
   align-items: center;
   justify-content: center;
   user-select: none;
+  z-index: 10;
   cursor: ${(props) => (props.onClick ? 'pointer' : 'default')};
   &:active {
     background-color: ${(props) => props.onClick && props.backgroundColor}CC;

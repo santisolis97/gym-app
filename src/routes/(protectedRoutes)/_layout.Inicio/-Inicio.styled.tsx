@@ -4,5 +4,5 @@ import { ScreenWrapper } from '../-layout.styled';
 export const InicioWrapper = styled(ScreenWrapper)`
   gap: 20px;
   justify-content: flex-start;
-  padding-top: 20%;
+  padding-top: 10vh;
 `;

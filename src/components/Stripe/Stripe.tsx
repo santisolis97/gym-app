@@ -8,6 +8,7 @@ type StripeProps = {
   backgroundColor: string;
   textColor: string;
   onClick?: () => void;
+  textSize?: string;
 };
 export const Stripe = ({
   backgroundColor,
@@ -15,6 +16,7 @@ export const Stripe = ({
   text,
   textColor,
   onClick,
+  textSize,
 }: StripeProps) => {
   return (
     <StyledStripe onClick={onClick} backgroundColor={backgroundColor}>
@@ -23,7 +25,7 @@ export const Stripe = ({
         fontFamily='Lexend Tera'
         fontWeight={800}
         color={textColor}
-        fontSize={'13px'}
+        fontSize={textSize ? textSize : '13px'}
       >
         {text}
       </Typography>

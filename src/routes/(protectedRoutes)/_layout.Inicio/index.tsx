@@ -1,30 +1,21 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router';
-import { BackgroundImage, ScreenWrapper } from '../-layout.styled';
-import weaver from '../../../images/assets/weaver.png';
-import avatar from '../../../images/assets/avatar.jpg';
+import { BackgroundImage } from '../-layout.styled';
+import pesas from '../../../images/assets/pesas.jpeg';
+
 import { AlumnDetails } from '../../../components/AlumnDetails/AlumnDetails';
 import { InicioWrapper } from './-Inicio.styled';
 import { Stripe } from '../../../components/Stripe/Stripe';
 import { IoLogoWhatsapp } from 'react-icons/io';
 import { colors } from '../../../utils/colors';
+import { useSessionStore } from '../../../utils/useSessionStore';
+import { useShallow } from 'zustand/shallow';
 
 export const Route = createFileRoute('/(protectedRoutes)/_layout/Inicio/')({
   component: Inicio,
 });
 
-const alumn = {
-  firstName: 'Tomás',
-  lastName: 'Gomez',
-  plan: 'MUSCULACIÓN 5 DIAS',
-  payment: 'AL DIA',
-  owes: '-',
-  due: '29/10/2024',
-  accountState: 'ASISTE',
-  profileImg: avatar,
-  phone: '5493624132561',
-};
-
 function Inicio() {
+  const alumn = useSessionStore(useShallow((state) => state.alumn));
   const navigate = useNavigate();
   const onRutina = () => {
     navigate({ to: '/Rutina' });
@@ -38,7 +29,7 @@ function Inicio() {
   };
   return (
     <InicioWrapper>
-      <BackgroundImage src={weaver} />
+      <BackgroundImage src={pesas} />
       <AlumnDetails isOwner alumn={alumn} />
       <Stripe
         onClick={onWhatsapp}
@@ -51,7 +42,7 @@ function Inicio() {
         onClick={onRutina}
         text='ACCEDÉ A TU RUTINA'
         backgroundColor={colors.black}
-        textColor={colors.white}
+        textColor={colors.fullWhite}
       />
     </InicioWrapper>
   );

@@ -18,11 +18,11 @@ const Tab = ({ name, icon, isActive }: TabProps) => {
     <StyledTab to={`/${name}`} $isActive={isActive}>
       <Icon
         name={icon}
-        color={isActive ? colors.green : colors.white}
+        color={isActive ? colors.green : colors.fullWhite}
         size={24}
       />
       <Typography
-        color={isActive ? colors.green : colors.white}
+        color={isActive ? colors.green : colors.fullWhite}
         fontFamily='Red Hat Text'
         fontSize={'12px'}
         fontWeight={400}
