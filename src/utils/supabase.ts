@@ -14,6 +14,9 @@ export const login = async (data: LoginData) =>
 export const logout = async () => {
   return await supabase.auth.signOut();
 };
+
+export const signup = async (data: LoginData) =>
+  await supabase.auth.signUp(data);
 export const getSession = (setSession: (session: Session | null) => void) =>
   supabase.auth.getSession().then(({ data: { session } }) => {
     setSession(session);

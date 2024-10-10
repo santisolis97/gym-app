@@ -21,6 +21,12 @@ export const GhostDiv = styled.div`
   flex: 1;
 `;
 
+export const FormButtonsWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  gap: 16px;
+`;
+
 export const ButtonsWrapper = styled.div`
   display: flex;
   width: fit-content;
@@ -50,8 +56,12 @@ export const Slide = styled.div`
 export const Button = styled.button<{
   variant: 'Primary' | 'Secondary';
   disabled?: boolean;
+  fullWidth?: boolean;
 }>`
   all: unset;
+  gap: 8px;
+  justify-content: center;
+  display: flex;
   background-color: ${(props) =>
     props.variant === 'Primary' ? colors.green : colors.secondaryButtonBg};
   border-radius: 23px;
@@ -63,6 +73,7 @@ export const Button = styled.button<{
   text-align: center;
   font-size: 12px;
   transition: background-color 0.3s ease;
+  ${({ fullWidth }) => fullWidth && 'width: 100%;'}
   ${({ disabled }) =>
     disabled &&
     `

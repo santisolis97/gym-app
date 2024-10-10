@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { createFileRoute, useNavigate } from '@tanstack/react-router';
+import { createFileRoute, redirect, useNavigate } from '@tanstack/react-router';
 import {
   BackgroundImage,
   Button,
@@ -10,8 +10,6 @@ import {
   Logo,
   Ribbon,
   RibbonWrapper,
-  Slide,
-  SwipableContent,
   Wrapper,
 } from './-login.styled';
 import bigLogo from '../../images/assets/bigLogo.svg';
@@ -26,17 +24,30 @@ import {
   LoginData,
   passwordValidation,
 } from './-login.types';
-import { login } from '../../utils/supabase';
+import { login, signup } from '../../utils/supabase';
 import { toast } from 'react-toastify';
+import { useSessionStore } from '../../utils/useSessionStore';
+import { ClipLoader } from 'react-spinners';
+import { colors } from '../../utils/colors';
 
 export const Route = createFileRoute('/login/')({
   component: FreeRoutes,
+  beforeLoad: async () => {
+    const { session } = useSessionStore.getState();
+    if (session) {
+      throw redirect({
+        to: '/Inicio',
+      });
+    }
+  },
 });
 
 function FreeRoutes() {
   const [hideButtons, setHideButtons] = useState(false);
+  const [isRegister, setIsRegister] = useState(false);
   const {
     handleSubmit,
+    reset,
     formState: { isValid },
     control,
   } = useForm<LoginData>({
@@ -47,17 +58,42 @@ function FreeRoutes() {
   const handleLoginClick = () => {
     setHideButtons(true);
   };
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: LoginData) => {
-    const loginRes = await login(data);
-    const { error } = loginRes;
-    if (error) {
-      toast(error.message, {
-        type: 'error',
-      });
+    if (isRegister) {
+      setIsLoading(true);
+      const signupRes = await signup(data);
+      setIsLoading(false);
+      const { error } = signupRes;
+      if (error) {
+        toast(error.message, {
+          type: 'error',
+        });
+      } else {
+        setHideButtons(false);
+        toast('Registro exitoso, por favor chequeá tu email para confirmarlo', {
+          type: 'success',
+        });
+        reset();
+      }
     } else {
-      navigate({ to: '/Inicio' });
+      setIsLoading(true);
+      const loginRes = await login(data);
+      setIsLoading(false);
+      const { error } = loginRes;
+      if (error) {
+        toast(error.message, {
+          type: 'error',
+        });
+      } else {
+        navigate({ to: '/Inicio' });
+      }
     }
+  };
+  const onRegisterClick = () => {
+    handleLoginClick();
+    setIsRegister(true);
   };
 
   return (
@@ -70,7 +106,9 @@ function FreeRoutes() {
           currentIndex={hideButtons ? 1 : 0}
           slides={[
             <ButtonsWrapper>
-              <Button variant='Secondary'>REGISTRARME</Button>
+              <Button onClick={onRegisterClick} variant='Secondary'>
+                REGISTRARME
+              </Button>
               <Button variant='Primary' onClick={handleLoginClick}>
                 INICIAR SESIÓN
               </Button>
@@ -111,7 +149,8 @@ function FreeRoutes() {
                 onClick={isValid ? handleLoginClick : undefined}
                 disabled={!isValid}
               >
-                INICIAR SESIÓN
+                {isRegister ? 'REGISTRARME' : 'INICIAR SESIÓN'}
+                {isLoading && <ClipLoader color={colors.black} size={12} />}
               </Button>
             </InputsWrapper>,
           ]}

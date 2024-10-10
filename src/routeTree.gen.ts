@@ -13,6 +13,7 @@ import { createFileRoute } from '@tanstack/react-router'
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as IndexImport } from './routes/index'
 import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as protectedRoutesLayoutImport } from './routes/(protectedRoutes)/_layout'
 import { Route as protectedRoutesLayoutRutinaIndexImport } from './routes/(protectedRoutes)/_layout.Rutina/index'
@@ -29,6 +30,11 @@ const protectedRoutesImport = createFileRoute('/(protectedRoutes)')()
 
 const protectedRoutesRoute = protectedRoutesImport.update({
   id: '/(protectedRoutes)',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const IndexRoute = IndexImport.update({
+  path: '/',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -76,6 +82,13 @@ const protectedRoutesLayoutBuscarIndexRoute =
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexImport
+      parentRoute: typeof rootRoute
+    }
     '/(protectedRoutes)': {
       id: '/'
       path: '/'
@@ -236,11 +249,13 @@ export interface FileRouteTypes {
 }
 
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   protectedRoutesRoute: typeof protectedRoutesRouteWithChildren
   LoginIndexRoute: typeof LoginIndexRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   protectedRoutesRoute: protectedRoutesRouteWithChildren,
   LoginIndexRoute: LoginIndexRoute,
 }
@@ -257,6 +272,7 @@ export const routeTree = rootRoute
     "__root__": {
       "filePath": "__root.tsx",
       "children": [
+        "/",
         "/",
         "/login/"
       ]
