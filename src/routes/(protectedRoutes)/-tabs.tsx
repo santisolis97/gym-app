@@ -18,7 +18,7 @@ export const tabs: TabProps[] = [
     isActive: true,
   },
   {
-    name: 'Perfil',
+    name: 'Alumnos',
     icon: 'profile',
     isActive: false,
   },

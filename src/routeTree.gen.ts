@@ -17,10 +17,10 @@ import { Route as IndexImport } from './routes/index'
 import { Route as LoginIndexImport } from './routes/login/index'
 import { Route as protectedRoutesLayoutImport } from './routes/(protectedRoutes)/_layout'
 import { Route as protectedRoutesLayoutRutinaIndexImport } from './routes/(protectedRoutes)/_layout.Rutina/index'
-import { Route as protectedRoutesLayoutPerfilIndexImport } from './routes/(protectedRoutes)/_layout.Perfil/index'
 import { Route as protectedRoutesLayoutNutricionIndexImport } from './routes/(protectedRoutes)/_layout.Nutricion/index'
 import { Route as protectedRoutesLayoutInicioIndexImport } from './routes/(protectedRoutes)/_layout.Inicio/index'
 import { Route as protectedRoutesLayoutBuscarIndexImport } from './routes/(protectedRoutes)/_layout.Buscar/index'
+import { Route as protectedRoutesLayoutAlumnosIndexImport } from './routes/(protectedRoutes)/_layout.Alumnos/index'
 
 // Create Virtual Routes
 
@@ -54,12 +54,6 @@ const protectedRoutesLayoutRutinaIndexRoute =
     getParentRoute: () => protectedRoutesLayoutRoute,
   } as any)
 
-const protectedRoutesLayoutPerfilIndexRoute =
-  protectedRoutesLayoutPerfilIndexImport.update({
-    path: '/Perfil/',
-    getParentRoute: () => protectedRoutesLayoutRoute,
-  } as any)
-
 const protectedRoutesLayoutNutricionIndexRoute =
   protectedRoutesLayoutNutricionIndexImport.update({
     path: '/Nutricion/',
@@ -75,6 +69,12 @@ const protectedRoutesLayoutInicioIndexRoute =
 const protectedRoutesLayoutBuscarIndexRoute =
   protectedRoutesLayoutBuscarIndexImport.update({
     path: '/Buscar/',
+    getParentRoute: () => protectedRoutesLayoutRoute,
+  } as any)
+
+const protectedRoutesLayoutAlumnosIndexRoute =
+  protectedRoutesLayoutAlumnosIndexImport.update({
+    path: '/Alumnos/',
     getParentRoute: () => protectedRoutesLayoutRoute,
   } as any)
 
@@ -110,6 +110,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginIndexImport
       parentRoute: typeof rootRoute
     }
+    '/(protectedRoutes)/_layout/Alumnos/': {
+      id: '/_layout/Alumnos/'
+      path: '/Alumnos'
+      fullPath: '/Alumnos'
+      preLoaderRoute: typeof protectedRoutesLayoutAlumnosIndexImport
+      parentRoute: typeof protectedRoutesLayoutImport
+    }
     '/(protectedRoutes)/_layout/Buscar/': {
       id: '/_layout/Buscar/'
       path: '/Buscar'
@@ -131,13 +138,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof protectedRoutesLayoutNutricionIndexImport
       parentRoute: typeof protectedRoutesLayoutImport
     }
-    '/(protectedRoutes)/_layout/Perfil/': {
-      id: '/_layout/Perfil/'
-      path: '/Perfil'
-      fullPath: '/Perfil'
-      preLoaderRoute: typeof protectedRoutesLayoutPerfilIndexImport
-      parentRoute: typeof protectedRoutesLayoutImport
-    }
     '/(protectedRoutes)/_layout/Rutina/': {
       id: '/_layout/Rutina/'
       path: '/Rutina'
@@ -151,19 +151,20 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 interface protectedRoutesLayoutRouteChildren {
+  protectedRoutesLayoutAlumnosIndexRoute: typeof protectedRoutesLayoutAlumnosIndexRoute
   protectedRoutesLayoutBuscarIndexRoute: typeof protectedRoutesLayoutBuscarIndexRoute
   protectedRoutesLayoutInicioIndexRoute: typeof protectedRoutesLayoutInicioIndexRoute
   protectedRoutesLayoutNutricionIndexRoute: typeof protectedRoutesLayoutNutricionIndexRoute
-  protectedRoutesLayoutPerfilIndexRoute: typeof protectedRoutesLayoutPerfilIndexRoute
   protectedRoutesLayoutRutinaIndexRoute: typeof protectedRoutesLayoutRutinaIndexRoute
 }
 
 const protectedRoutesLayoutRouteChildren: protectedRoutesLayoutRouteChildren = {
+  protectedRoutesLayoutAlumnosIndexRoute:
+    protectedRoutesLayoutAlumnosIndexRoute,
   protectedRoutesLayoutBuscarIndexRoute: protectedRoutesLayoutBuscarIndexRoute,
   protectedRoutesLayoutInicioIndexRoute: protectedRoutesLayoutInicioIndexRoute,
   protectedRoutesLayoutNutricionIndexRoute:
     protectedRoutesLayoutNutricionIndexRoute,
-  protectedRoutesLayoutPerfilIndexRoute: protectedRoutesLayoutPerfilIndexRoute,
   protectedRoutesLayoutRutinaIndexRoute: protectedRoutesLayoutRutinaIndexRoute,
 }
 
@@ -187,20 +188,20 @@ const protectedRoutesRouteWithChildren = protectedRoutesRoute._addFileChildren(
 export interface FileRoutesByFullPath {
   '/': typeof protectedRoutesLayoutRouteWithChildren
   '/login': typeof LoginIndexRoute
+  '/Alumnos': typeof protectedRoutesLayoutAlumnosIndexRoute
   '/Buscar': typeof protectedRoutesLayoutBuscarIndexRoute
   '/Inicio': typeof protectedRoutesLayoutInicioIndexRoute
   '/Nutricion': typeof protectedRoutesLayoutNutricionIndexRoute
-  '/Perfil': typeof protectedRoutesLayoutPerfilIndexRoute
   '/Rutina': typeof protectedRoutesLayoutRutinaIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof protectedRoutesLayoutRouteWithChildren
   '/login': typeof LoginIndexRoute
+  '/Alumnos': typeof protectedRoutesLayoutAlumnosIndexRoute
   '/Buscar': typeof protectedRoutesLayoutBuscarIndexRoute
   '/Inicio': typeof protectedRoutesLayoutInicioIndexRoute
   '/Nutricion': typeof protectedRoutesLayoutNutricionIndexRoute
-  '/Perfil': typeof protectedRoutesLayoutPerfilIndexRoute
   '/Rutina': typeof protectedRoutesLayoutRutinaIndexRoute
 }
 
@@ -209,10 +210,10 @@ export interface FileRoutesById {
   '/': typeof protectedRoutesRouteWithChildren
   '/_layout': typeof protectedRoutesLayoutRouteWithChildren
   '/login/': typeof LoginIndexRoute
+  '/_layout/Alumnos/': typeof protectedRoutesLayoutAlumnosIndexRoute
   '/_layout/Buscar/': typeof protectedRoutesLayoutBuscarIndexRoute
   '/_layout/Inicio/': typeof protectedRoutesLayoutInicioIndexRoute
   '/_layout/Nutricion/': typeof protectedRoutesLayoutNutricionIndexRoute
-  '/_layout/Perfil/': typeof protectedRoutesLayoutPerfilIndexRoute
   '/_layout/Rutina/': typeof protectedRoutesLayoutRutinaIndexRoute
 }
 
@@ -221,29 +222,29 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/login'
+    | '/Alumnos'
     | '/Buscar'
     | '/Inicio'
     | '/Nutricion'
-    | '/Perfil'
     | '/Rutina'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/login'
+    | '/Alumnos'
     | '/Buscar'
     | '/Inicio'
     | '/Nutricion'
-    | '/Perfil'
     | '/Rutina'
   id:
     | '__root__'
     | '/'
     | '/_layout'
     | '/login/'
+    | '/_layout/Alumnos/'
     | '/_layout/Buscar/'
     | '/_layout/Inicio/'
     | '/_layout/Nutricion/'
-    | '/_layout/Perfil/'
     | '/_layout/Rutina/'
   fileRoutesById: FileRoutesById
 }
@@ -287,15 +288,19 @@ export const routeTree = rootRoute
       "filePath": "(protectedRoutes)/_layout.tsx",
       "parent": "/",
       "children": [
+        "/_layout/Alumnos/",
         "/_layout/Buscar/",
         "/_layout/Inicio/",
         "/_layout/Nutricion/",
-        "/_layout/Perfil/",
         "/_layout/Rutina/"
       ]
     },
     "/login/": {
       "filePath": "login/index.tsx"
+    },
+    "/_layout/Alumnos/": {
+      "filePath": "(protectedRoutes)/_layout.Alumnos/index.tsx",
+      "parent": "/_layout"
     },
     "/_layout/Buscar/": {
       "filePath": "(protectedRoutes)/_layout.Buscar/index.tsx",
@@ -307,10 +312,6 @@ export const routeTree = rootRoute
     },
     "/_layout/Nutricion/": {
       "filePath": "(protectedRoutes)/_layout.Nutricion/index.tsx",
-      "parent": "/_layout"
-    },
-    "/_layout/Perfil/": {
-      "filePath": "(protectedRoutes)/_layout.Perfil/index.tsx",
       "parent": "/_layout"
     },
     "/_layout/Rutina/": {

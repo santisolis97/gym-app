@@ -5,7 +5,11 @@ import {
   useLocation,
   useRouter,
 } from '@tanstack/react-router';
-import { ContentWrapper, LayoutWrapper } from './-layout.styled';
+import {
+  ContentWrapper,
+  LayoutWrapper,
+  NavigationBarWrapper,
+} from './-layout.styled';
 import { NavigationBar } from '../../components/NavigationBar/NavigationBar';
 import { useState } from 'react';
 import { tabs } from './-tabs';
@@ -33,7 +37,9 @@ function Layout() {
       <ContentWrapper>
         <Outlet />
       </ContentWrapper>
-      <NavigationBar activeTab={pathname.replace('/', '')} tabs={tabs} />
+      <NavigationBarWrapper>
+        <NavigationBar activeTab={pathname.replace('/', '')} tabs={tabs} />
+      </NavigationBarWrapper>
     </LayoutWrapper>
   );
 }
