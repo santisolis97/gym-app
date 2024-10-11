@@ -32,17 +32,17 @@ These are the colors used to theme our app.
 
 | Color                 | Hex                                                                    |
 | --------------------- | ---------------------------------------------------------------------- |
-| Black                 | ![#000000](https://via.placeholder.com/10/000000?text=+) #000000       |
-| White                 | ![#D8D5D5](https://via.placeholder.com/10/D8D5D5?text=+) #D8D5D5       |
-| Full White            | ![#FFFFFF](https://via.placeholder.com/10/FFFFFF?text=+) #FFFFFF       |
-| Green                 | ![#E6FE58](https://via.placeholder.com/10/E6FE58?text=+) #E6FE58       |
-| Hovered Green         | ![#D3FE3E](https://via.placeholder.com/10/D3FE3E?text=+) #D3FE3E       |
-| Grey                  | ![#171717](https://via.placeholder.com/10/171717?text=+) #171717       |
-| Bar Grey              | ![#747272](https://via.placeholder.com/10/747272?text=+) #747272       |
-| Text Container Grey   | ![#232222](https://via.placeholder.com/10/232222?text=+) #232222       |
-| Text Container Border | ![#95959530](https://via.placeholder.com/10/95959530?text=+) #95959530 |
-| Secondary Button BG   | ![#D9D9D966](https://via.placeholder.com/10/D9D9D966?text=+) #D9D9D966 |
-| Secondary Hover       | ![#E0E0E0](https://via.placeholder.com/10/E0E0E0?text=+) #E0E0E0       |
+| Black                 | ![#000000](https://placehold.co/15x15/000000/000000.png) #000000       |
+| White                 | ![#D8D5D5](https://placehold.co/15x15/D8D5D5/D8D5D5.png) #D8D5D5       |
+| Full White            | ![#FFFFFF](https://placehold.co/15x15/FFFFFF/FFFFFF.png) #FFFFFF       |
+| Green                 | ![#E6FE58](https://placehold.co/15x15/E6FE58/E6FE58.png) #E6FE58       |
+| Hovered Green         | ![#D3FE3E](https://placehold.co/15x15/D3FE3E/D3FE3E.png) #D3FE3E       |
+| Grey                  | ![#171717](https://placehold.co/15x15/171717/171717.png) #171717       |
+| Bar Grey              | ![#747272](https://placehold.co/15x15/747272/747272.png) #747272       |
+| Text Container Grey   | ![#232222](https://placehold.co/15x15/232222/232222.png) #232222       |
+| Text Container Border | ![#95959530](https://placehold.co/15x15/95959530/95959530.png) #95959530 |
+| Secondary Button BG   | ![#D9D9D966](https://placehold.co/15x15/D9D9D966/D9D9D966.png) #D9D9D966 |
+| Secondary Hover       | ![#E0E0E0](https://placehold.co/15x15/E0E0E0/E0E0E0.png) #E0E0E0       |
 
 ## Run Locally
 
